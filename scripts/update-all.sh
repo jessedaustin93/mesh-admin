@@ -3,8 +3,9 @@
 LOG=~/mesh-admin/update-all.log
 
 while read NODE; do
-    echo "Updating node: $NODE" | tee -a $LOG
-    ssh $NODE 'sudo apt update && sudo apt upgrade -y' 2>&1 | tee -a $LOG
+    NODE=$(echo "$NODE" | cut -d'#' -f1 | xargs)
+    [ -z "$NODE" ] && continue
+    # your code...
 done < ~/mesh-admin/nodelist.txt
 
 echo "All nodes updated." | tee -a $LOG
