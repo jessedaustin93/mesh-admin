@@ -7,7 +7,11 @@ with open(logfile, 'a') as lf:
     lf.write(f"\nStatus check run at {datetime.now()}:\n")
 
 with open('/home/jesse/mesh-admin/nodelist.txt') as f:
-    nodes = [line.strip() for line in f if line.strip()]
+    nodes = []
+    for line in f:
+        line = line.split('#')[0].strip()
+        if line:
+            nodes.append(line)
 
 for node in nodes:
     # extract the host/IP (assumes "user@host" format)
