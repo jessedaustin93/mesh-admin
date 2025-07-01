@@ -20,4 +20,6 @@ for node in nodes:
     print(f"Node {host}: {status}")
     with open(logfile, 'a') as lf:
         lf.write(f"Node {host}: {status}\n")
+    if status == "❌ Offline":
+        subprocess.run(['notify-send', f"ALERT: Node {host} is OFFLINE!"])
 
